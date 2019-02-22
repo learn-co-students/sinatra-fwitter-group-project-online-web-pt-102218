@@ -7,4 +7,17 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  get '/' do
+
+    erb :layout
+  end
+
+  get '/signup' do
+
+    erb :signup
+  end
+  post '/signup' do
+
+    redirect to "/user/#{user.id}"
+  end
 end
