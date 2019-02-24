@@ -1,5 +1,5 @@
 require './config/environment'
-
+require 'pry'
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -9,15 +9,12 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
 
-    erb :layout
+    erb :index
   end
 
-  get '/signup' do
-
-    erb :signup
-  end
-  post '/signup' do
-
-    redirect to "/user/#{user.id}"
-  end
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+end
 end
