@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
     if !logged_in?
       redirect to '/login'
     else
+
       @tweets = Tweet.all
   erb :'tweets/tweets'
     end
@@ -46,13 +47,17 @@ end
   erb :'/tweets/edit_tweet'
 end
 
-  patch "/lifts/:id" do
-    if logged_in
+  patch "/tweets/:id" do
+    if logged_in? && !params["content"].empty?
       @tweet = Tweet.find(1)
-      @lift.update(params[:tweet])
+      hash ={:content => params[:content]}
+      @tweet.update(hash)
     redirect to "/tweets/#{@tweet.id}"
-    end
+  else
+    redirect to "/tweets/#{@tweet.id}/edit"
+
   end
 
 
+end
 end
