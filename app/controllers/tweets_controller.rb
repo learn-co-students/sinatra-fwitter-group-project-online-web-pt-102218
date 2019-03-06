@@ -48,16 +48,23 @@ end
 end
 
   patch "/tweets/:id" do
-    binding.pry
-    if logged_in? && params["content"].empty?
 
-      redirect to "/tweets/#{@tweet.id}/edit"
+    if logged_in? && params["content"] == ""
+
+      redirect to "/tweets/#{params["id"]}/edit"
     else
       @tweet = Tweet.find(params["id"])
       hash ={:content => params[:content]}
       @tweet.update(hash)
       redirect to "/tweets/#{@tweet.id}"
     end
-
 end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find(params["id"])
+    if logged_in? && @tweet.user_id == current_user.id
+    @tweet.delete
+    end
+    redirect to '/tweets'
+  end
 end
