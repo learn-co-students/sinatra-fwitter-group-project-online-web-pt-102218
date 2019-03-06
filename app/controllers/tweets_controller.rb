@@ -48,7 +48,7 @@ end
 end
 
   patch "/tweets/:id" do
-
+    binding.pry
     if logged_in? && params["content"].empty?
 
       redirect to "/tweets/#{@tweet.id}/edit"
