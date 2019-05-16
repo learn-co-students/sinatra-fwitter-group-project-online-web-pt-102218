@@ -1,0 +1,13 @@
+<h1> Welcome, <%= Helpers.current_user(session).username %>! </h1>
+
+<p> Tweets: </p>
+
+<ul>
+  <% @tweets.each do |tweet|%>
+  <h3><%=tweet.user.username%>:
+  
+  <%= tweet.content%></h3>
+  <%end%>
+</ul>
+
+#here we are iterating over each tweet, listing the username who wrote it, and outputing the tweet content 
